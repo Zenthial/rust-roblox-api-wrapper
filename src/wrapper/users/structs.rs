@@ -109,3 +109,33 @@ impl fmt::Debug for UsersResponse {
             .finish()
     }
 }
+
+#[derive(Deserialize)]
+pub struct UsernameData {
+    name: String
+}
+
+impl fmt::Debug for UsernameData {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.debug_struct("UsernameData")
+            .field("name", &self.name)
+            .finish()
+    }
+}
+
+#[derive(Deserialize)]
+pub struct UsernameResponse {
+    previousPageCursor: Option<String>,
+    nextPageCursor: Option<String>,
+    data: Vec<UsernameData>
+}
+
+impl fmt::Debug for UsernameResponse {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        formatter.debug_struct("UsernameResponse")
+            .field("previousPageCursor", &self.previousPageCursor)
+            .field("nextPageCursor", &self.nextPageCursor)
+            .field("data", &self.data)
+            .finish()
+    }
+}

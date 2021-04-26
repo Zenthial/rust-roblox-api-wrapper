@@ -1,5 +1,6 @@
 #![allow(dead_code)]
-mod structs;
+pub mod structs;
+pub mod enums;
 
 pub fn get_userid_from_username(username: &str) -> Result<i64, Box<dyn std::error::Error>> {
     let url = format!("https://api.roblox.com/users/get-by-username?username={}", username);
@@ -26,5 +27,34 @@ pub fn get_user_info(userid: i64) -> Result<structs::UsersResponse, Box<dyn std:
     let url = format!("https://users.roblox.com/v1/users/{}", userid);
     let resp = reqwest::blocking::get(url)?
         .json::<structs::UsersResponse>()?;
+    Ok(resp)
+}
+
+pub fn get_usernames(userid: i64) -> Result<structs::UsernameResponse, Box<dyn std::error::Error>> {
+    let url = format!("https://users.roblox.com/v1/users/{}/username-history", userid);
+    let resp = reqwest::blocking::get(url)?
+        .json::<structs::UsernameResponse>()?;
+    Ok(resp)
+}
+
+/// Limits can only be set values, resulting in the limit enum, with options being Ten, TwentyFive, Fifty and OneHundred
+pub fn get_usernames_with_limit(userid: i64, limit: enums::Limits) -> Result<structs::UsernameResponse, Box<dyn std::error::Error>> {
+    let url = format!("https://users.roblox.com/v1/users/{}/username-history?limit={}", userid, limit);
+    let resp = reqwest::blocking::get(url)?
+        .json::<structs::UsernameResponse>()?;
+    Ok(resp)
+}
+
+pub fn get_usernames_with_cursor(userid: i64, cursor: String) -> Result<structs::UsernameResponse, Box<dyn std::error::Error>> {
+    let url = format!("https://users.roblox.com/v1/users/{}/username-history?limit=10&cursor={}", userid, cursor);
+    let resp = reqwest::blocking::get(url)?
+        .json::<structs::UsernameResponse>()?;
+    Ok(resp)
+}
+
+pub fn get_usernames_with_cursor_and_limit(userid: i64, cursor: String, limit: enums::Limits) -> Result<structs::UsernameResponse, Box<dyn std::error::Error>> {
+    let url = format!("https://users.roblox.com/v1/users/{}/username-history?limit={}&cursor={}", userid, limit, cursor);
+    let resp = reqwest::blocking::get(url)?
+        .json::<structs::UsernameResponse>()?;
     Ok(resp)
 }
