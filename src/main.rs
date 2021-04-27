@@ -1,3 +1,4 @@
+mod tests;
 mod wrapper;
 
 //9345226
