@@ -11,6 +11,12 @@ pub fn get_userid_from_username(username: &str) -> Result<i64, Box<dyn Error>> {
     Ok(resp.Id)
 }
 
+pub fn get_username_from_userid_raw_response(userid: i64) {
+    let url = format!("https://api.roblox.com/users/{}", userid);
+    let resp = reqwest::blocking::get(url);
+    let r = resp.unwrap();
+    println!("{}", r.status());
+}
 pub fn get_username_from_userid(userid: i64) -> Result<String, Box<dyn Error>> {
     let url = format!("https://api.roblox.com/users/{}", userid);
     let resp = reqwest::blocking::get(url)?

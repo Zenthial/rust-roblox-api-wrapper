@@ -13,4 +13,9 @@ mod tests {
         let username = wrapper::users::get_username_from_userid(9345226).unwrap();
         assert_eq!(username, "tomspell");
     }
+
+    // #[test]
+    // fn server_okay() {
+    //     wrapper::users::get_username_from_userid_raw_response(9345226);
+    // }
 }
