@@ -1,7 +1,7 @@
 [package]
 name = "roblox_api_wrapper"
 version = "0.1.0"
-authors = ["Tom Schollenberger <tom@schollenbergers.com>"]
+authors = ["Tom"]
 edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
